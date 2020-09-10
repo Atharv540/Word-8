@@ -184,3 +184,9 @@ body{
 #toggleSrcButton:hover{
     background-color: #E1DDDC;
 }
+#googleFontsButton{
+    background-color: #FFFFFF;
+}
+#googleFontsButton:hover{
+    background-color: #E1DDDC;
+}
