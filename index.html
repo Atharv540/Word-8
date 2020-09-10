@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="p5.js"></script>
+		<script src="p5.dom.min.js"></script>
+		<script src="p5.min.js"></script>
+		<script src="p5.play.js"></script>
+		<script src="p5.sound.min.js"></script>
+		<script src="https://use.fontawesome.com/122b3c7be5.js"></script>
+		<script src="https://kit.fontawesome.com/ccd7270aeb.js" crossorigin="anonymous"></script>
+		<script src="p5.js-speech/lib/p5.speech.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+    	<meta charset="utf-8">
+	</head>
+	<body onload="enableEditMode()">
+		<script src="sketch.js"></script>
+		<div style="background-color: #FFFFFF; position: fixed; width:100%;">
+			<br>
+			<button onclick="excCmd('bold')" id="boldButton" title="Bold" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px; margin-left: 4px;" ><i class="fas fa-bold"></i></button>
+			<button onclick="excCmd('italic')" id="italicButton" title="Italic" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-italic"></i></button>
+			<button onclick="excCmd('underline')" id="underlineButton" title="Underlined" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-underline"></i></button>
+			<button onclick="excCmd('removeFormat')" id="removeFormatButton" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;" title="Remove Format"><i class="fas fa-remove-format"></i></button>
+			<button onclick="excCmd('StrikeThrough')" id="strikeButton"title="Strike through" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-strikethrough"></i></button>
+			|
+			<button onclick="excCmd('subscript')" id="subscriptButton" title="Subscript" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-subscript"></i></button>
+			<button onclick="excCmd('superscript')" id="superscriptButton" title="Superscript" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-superscript"></i></button>
+			|
+			<button onclick="excCmdWithArg('createLink', prompt('Enter a URL','https://')) " id="linkButton" title="Link" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px; margin-left: 4px;"><i class="fas fa-link"></i></button>
+			<button onclick="excCmd('unlink')" id="unlinkButton" title="Unlink" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-unlink"></i></button>
+			|
+			<button onclick="excCmd('undo')" title="Undo" id="undoButton" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-undo"></i></button>
+			<button onclick="excCmd('redo')" title="Redo" id="undoButton" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-repeat"></i></button>
+			|
+			<button onclick="excCmd('insertUnorderedList')" id="ulButton"title="Bullet Points" style="border-radius: 0%;border: none; outline: none; padding: 5px 7px;"><i class="fas fa-list-ul"></i></button>
+			<button onclick="excCmd('insertOrderedList'); excCmdWithArg('fontName', font.value);"  id="olButton" title="Numbered Points" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-list-ol"></i></button>
+			|
+			<button onclick="excCmd('justifyLeft')" id="leftAlignButton" title="Align Left" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-align-left"></i></button>
+			<button onclick="excCmd('justifyCenter')" id="centerAlignButton" title="Align Center" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-align-center"></i></button>
+			<button onclick="excCmd('justifyRight')" id="rightAlignButton" title="Align Right" style="border-radius: 0%;border: none; outline: none; padding: 5px 7px;"><i class="fas fa-align-right"></i></button>
+			<button onclick="excCmd('justifyFull')" id="fullAlignButton" title="Align Full" style="border-radius: 0%;border: none; outline: none; padding: 5px 7px;"><i class="fas fa-align-justify"></i></button>
+			|
+			<button onclick="excCmd('cut')" id="cutButton" style="border-radius: 0%;  border: none; outline: none; padding: 5px 7px;"><i class="fas fa-cut" title="Cut" ></i></button>
+			<button onclick="excCmd('copy')" id="copyButton" style="border-radius: 0%;border: none; outline: none; padding: 5px 7px;"><i class="fas fa-copy" title="Copy" ></i></button>
+			<button onclick="excCmd('paste')" id="pasteButton" title="Paste" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-paste"></i></button>
+			|
+			<button onclick="excCmdWithArg('hiliteColor', highlightInput.value);" id="highlightButton" title="Highlight" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-highlighter"></i></button>
+			<button onclick="excCmdWithArg('hiliteColor', 'white');" id="unhighlightButton" title="Unhighlight" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="far fa-times-circle"></i><i class="fas fa-highlighter"></i></button>
+			|
+			<button onclick="excCmd('indent')" id="indentButton" title="Indent" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-indent"></i></button>
+			<button onclick="excCmd('outdent')" id="outdentButton" title="Outdent" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-outdent"></i></button>
+			|
+			<button onclick="excCmd('insertParagraph');" id="paragraphButton" title="Paragraph" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-paragraph"></i></button>
+			<button onclick="toggleSource()" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"  title="Toggle Source" id="toggleSrcButton"><i class="fas fa-code fa"></i></button>
+			<br>
+			<br>
+			<input type="color" onchange="excCmdWithArg('hiliteColor', this.value);" id="highlightInput" value="#FFFF00" style=" margin-left: 4px;" list="colors">
+			<input type="color" onchange="excCmdWithArg('foreColor', this.value);" id="fontColorInput" list="colors">
+			<button onclick="createMarqueeOfChoice();" title="Insert Moving text" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;">Create Moving Text</button>
+			<br>
+			<br>
+			<button onclick="speak(document.getElementById('TextField').contentWindow.document.body.textContent)" title="Speak" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px; margin-left: 4px;"><i class="fas fa-microphone"></i></button>
+			<select id="Voices" style="background-color: rgb(175, 169, 168 ); padding: 3px 5px; outline: none;">
+				<optgroup label="Voices for Microsoft Edge">
+					<option value="Microsoft David - English (United States)" style="font-family: Dubai;">Microsoft David - English (United States)</option>
+					<option value="Microsoft Ravi - English (India)" style="font-family: Dubai;">Microsoft Ravi - English (India)</option>
+					<option value="Microsoft Heera - English (India)" style="font-family: Dubai;">Microsoft Heera - English (India)</option>
+					<option value="Microsoft Mark - English (United States)" style="font-family: Dubai;">Microsoft Mark - English (United States)</option>
+					<option value="Microsoft Zira - English (United States)" style="font-family: Dubai;">Microsoft Zira - English (United States)</option>
+					<option value="Microsoft Katja Online (Natural) - German (Germany)" style="font-family: Dubai;">Microsoft Katja Online (Natural) - German (Germany)</option>
+					<option value="Microsoft Natasha Online (Natural) - English (Australia)" style="font-family: Dubai;">Microsoft Natasha Online (Natural) - English (Australia)</option>
+					<option value="Microsoft Clara Online (Natural) - English (Canada)" style="font-family: Dubai;">Microsoft Clara Online (Natural) - English (Canada)</option>
+					<option value="Microsoft Mia Online (Natural) - English (United Kingdom)" style="font-family: Dubai;">Microsoft Mia Online (Natural) - English (United Kingdom)</option>
+					<option value="Microsoft Neerja Online (Natural) - English (India)" style="font-family: Dubai;">Microsoft Neerja Online (Natural) - English (India)</option>
+					<option value="Microsoft Aria Online (Natural) - English (United States)" style="font-family: Dubai;">Microsoft Aria Online (Natural) - English (United States)</option>
+					<option value="Microsoft Mark - English (United States)" style="font-family: Dubai;">Microsoft Mark - English (United States)</option>
+					<option value="Microsoft Guy Online (Natural) - English (United States)" style="font-family: Dubai;">Microsoft Guy Online (Natural) - English (United States)</option>
+					<option value="Microsoft Elvira Online (Natural) - Spanish (Spain)" style="font-family: Dubai;">Microsoft Elvira Online (Natural) - Spanish (Spain)</option>
+					<option value="Microsoft Dalia Online (Natural) - Spanish (Mexico)" style="font-family: Dubai;">Microsoft Dalia Online (Natural) - Spanish (Mexico)</option>
+					<option value="Microsoft Sylvie Online (Natural) - French (Canada)" style="font-family: Dubai;">Microsoft Sylvie Online (Natural) - French (Canada)</option>
+					<option value="Microsoft Denise Online (Natural) - French (France)" style="font-family: Dubai;">Microsoft Denise Online (Natural) - French (France)</option>
+					<option value="Microsoft Swara Online (Natural) - Hindi (India)" style="font-family: Dubai;">Microsoft Swara Online (Natural) - Hindi (India)</option>
+					<option value="Microsoft Elsa Online (Natural) - Italian (Italy)" style="font-family: Dubai;">Microsoft Elsa Online (Natural) - Italian (Italy)</option>
+					<option value="Microsoft Nanami Online (Natural) - Japanese (Japan)" style="font-family: Dubai;">Microsoft Nanami Online (Natural) - Japanese (Japan)</option>
+					<option value="Microsoft SunHi Online (Natural) - Korean (Korea)" style="font-family: Dubai;">Microsoft SunHi Online (Natural) - Korean (Korea)</option>
+					<option value=" Microsoft Colette Online (Natural) - Dutch (Netherlands)" style="font-family: Dubai;"> Microsoft Colette Online (Natural) - Dutch (Netherlands)</option>
+					<option value="Microsoft Zofia Online (Natural) - Polish (Poland)" style="font-family: Dubai;">Microsoft Zofia Online (Natural) - Polish (Poland)</option>
+					<option value="Microsoft Francisca Online (Natural) - Portuguese (Brazil)" style="font-family: Dubai;">Microsoft Francisca Online (Natural) - Portuguese (Brazil)</option>
+					<option value="Microsoft Dariya Online (Natural) - Russian (Russia)" style="font-family: Dubai;">Microsoft Dariya Online (Natural) - Russian (Russia)</option>
+					<option value="Microsoft Emel Online (Natural) - Turkish (Turkey)" style="font-family: Dubai;">Microsoft Emel Online (Natural) - Turkish (Turkey)</option>
+					<option value="Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)" style="font-family: Dubai;">Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)</option>
+					<option value="Microsoft HiuGaai Online (Natural) - Chinese (Hong Kong)" style="font-family: Dubai;">Microsoft HiuGaai Online (Natural) - Chinese (Hong Kong)</option>
+					<option value="Microsoft HiuGaai Online (Natural) - Chinese (Hong Kong)" style="font-family: Dubai;">Microsoft HiuGaai Online (Natural) - Chinese (Hong Kong)</option>
+					<option value="Microsoft HsiaoYu Online (Natural) - Chinese (Taiwan)" style="font-family: Dubai;">Microsoft HsiaoYu Online (Natural) - Chinese (Taiwan)</option>
+					<option value="Microsoft David Desktop - English (United States)" style="font-family: Dubai;">Microsoft David Desktop - English (United States)</option>
+					<option value="Microsoft Zira Desktop - English (United States)" style="font-family: Dubai;">Microsoft Zira Desktop - English (United States)</option>
+					</optgroup>
+					<optgroup label="Voices For Google Chrome">
+					<option value="Google Deutsch" style="font-family: Dubai;">Google Deutsch</option>
+					<option value="Google US English" style="font-family: Dubai;">Google US English</option>
+					<option value="Google UK English Female" style="font-family: Dubai;">Google UK English Female</option>
+					<option value="Google UK English Male" style="font-family: Dubai;">Google UK English Male</option>
+					<option value="Google español" style="font-family: Dubai;">Google español</option>
+					<option value="Google español de Estados Unidos" style="font-family: Dubai;">Google español de Estados Unidos</option>
+					<option value="Google français" style="font-family: Dubai;">Google français</option>
+					<option value="Google हिन्दी" style="font-family: Dubai;">Google हिन्दी</option>
+					<option value="Google Bahasa Indonesia" style="font-family: Dubai;">Google Bahasa Indonesia</option>
+					<option value="Google italiano" style="font-family: Dubai;">Google italiano</option>
+					<option value="Google 日本語" style="font-family: Dubai;">Google 日本語</option>
+					<option value="Google 한국의" style="font-family: Dubai;">Google 한국의</option>
+					<option value="Google Nederlands" style="font-family: Dubai;">Google Nederlands</option>
+					<option value="Google polski" style="font-family: Dubai;">Google polski</option>
+					<option value="Google português do Brasil" style="font-family: Dubai;">Google português do Brasil</option>
+					<option value="Google русский" style="font-family: Dubai;">Google русский</option>
+					<option value="Google 普通话（中国大陆）" style="font-family: Dubai;">Google 普通话（中国大陆）</option>
+					<option value="Google 粤語（香港）" style="font-family: Dubai;">Google 粤語（香港）</option>
+					<option value="Google 國語（臺灣）" style="font-family: Dubai;">Google 國語（臺灣）</option>
+					</optgroup>
+			</select>
+			<button onclick="stopSpeaking()" title="Stop Speaking" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-microphone-slash"></i></button>
+			<br>
+			<br>
+			<button onclick="excCmd('delete')" title="Backspace" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-backspace"></i></button>
+			<button onclick="excCmd('forwardDelete')" title=" Forward Delete" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-forward"></i>    <i class="fas fa-backspace fa-rotate-180"></i></button>
+			<button onclick="excCmd('selectAll')" title="Select All" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;">Select All</button>
+			<button onclick="excCmdWithArg('insertImage', prompt('Enter the image URL', ''));" title="Image" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-file-image-o"></i></button>
+			<button onclick="excCmd('insertHorizontalRule')" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;">HR</button>
+			<button onclick="excCmd('insertHTML')" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;" title="Insert HTML"><i class="fab fa-html5 fa-lg"></i></button>
+			<button onclick="excCmd('ClearAuthenticationCache')" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;" title="Clear Autentication Cache">Clear</button>
+
+			<select onchange="excCmdWithArg('formatBlock',this.value)" style="background-color: rgb(175, 169, 168 ); padding: 3px 5px; outline: none;">
+				<option value="H1" style="font-size: 32px">Title</option>
+				<option value="H2" style="font-size: 24px">Subtitle</option>
+				<option value="H3" style="font-size: 18.72px">Heading 1</option>
+				<option value="H4" style="font-size: 16px">Heading 2</option>
+				<option value="H5" style="font-size: 13.28px">Heading 3</option>
+				<option value="H6" style="font-size: 10.72px">Small Heading</option>
+			</select>
+			<select style="background-color: rgb(175, 169, 168 ); padding: 3px 5px; outline: none;" onchange="excCmdWithArg('fontSize', this.value);">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+			</select>
+			<select onchange="excCmdWithArg('fontName',this.value)" style="font-family: Calibri; background-color: rgb(175, 169, 168 ); padding: 3px; outline: none;" id="Fonts">
+				<option value="Agency Fb" style="font-family: agency fb;" title="Agency Fb"> Agency Fb</option>
+				<option value="Algerian" style="font-family: algerian;" title="Algerian"> Algerian </option>
+				<option value="Arial" style="font-family: arial;" title="Arial"> Arial </option>
+				<option value="Arial Black" style="font-family: arial black;" title="Arial Black"> Arial black </option>
+				<option value="Arial Narrow" style="font-family: arial narrow;" title="Arial Narrow"> Arial Narrow </option>
+				<option value="Arial Nova" style="font-family: arial nova;" title="Arial Nova"> Arial Nova </option>
+				<option value="Bahnschrift" style="font-family: Bahnschrift;" title="Bahnschrift"> Bahnschrift </option>
+				<option value="Bahnschrift Condensed" style="font-family: Bahnschrift Condensed;" title="Bahnschrift Condensed"> Bahnschrift Condensed</option>
+				<option value="Bahnschrift Light" style="font-family: Bahnschrift Light;" title="Bahnschrift Light"> Bahnschrift Light</option>
+				<option value="Bahnschrift Light Condensed" style="font-family: Bahnschrift Light Condensed;" title="Bahnschrift Light Condensed"> Bahnschrift Light Condensed</option>
+				<option value="Baskerville Old Face" style="font-family: Baskerville Old Face;" title="Baskerville Old Face"> Baskerville Old Face</option>
+				<option value="Bell MT" style="font-family: Bell MT;" title="Bell MT"> Bell MT</option>
+				<option value="Bembo" style="font-family: Bembo;" title="Bembo"> Bembo</option>
+				<option value="Berlin Sans Fb" style="font-family: Berlin Sans Fb;" title="Berlin Sans Fb"> Berlin Sans Fb</option>
+				<option value="Berlin Sans Fb Demi" style="font-family: Berlin Sans Fb Demi;" title="Berlin Sans Fb Demi"> Berlin Sans Fb Demi</option>
+				<option value="Bernard MT Condensed" style="font-family: Bernard MT Condensed;" title="Bernard MT Condensed"> Bernard MT Condensed</option>
+				<option value="Blackadder ITC" style="font-family: Blackadder ITC;" title="Blackadder ITC"> Blackadder ITC</option>
+				<option value="Bodoni MT" style="font-family: Bodoni MT;" title="Bodoni MT"> Bodoni MT</option>
+				<option value="Bodoni MT Black" style="font-family: Bodoni MT Black;" title="Bodoni MT Black"> Bodoni MT Black</option>
+				<option value="Bodoni MT Condensed" style="font-family: Bodoni MT Condensed;" title="Bodoni MT Condensed"> Bodoni MT Condensed</option>
+				<option value="Book Antiqua" style="font-family: Book Antiqua;" title="Book Antiqua"> Book Antiqua</option>
+				<option value="Bookman Old Style" style="font-family: Bookman Old Style;" title="Bookman Old Style"> Bookman Old Style</option>
+				<option value="Bowlby One SC" style="font-family: Bowlby One SC;" title="Bowlby One SC"> Bowlby One SC</option>
+				<option value="Bradley Hand ITC" style="font-family: Bradley Hand ITC;" title="Bradley Hand ITC"> Bradley Hand ITC</option>
+				<option value="Broadway" style="font-family: Broadway;" title="Broadway"> Broadway</option>
+				<option value="Brush Script MT" style="font-family: Brush Script MT;" title="Brush Script MT"> Brush Script MT</option>
+				<option value="Bungee Inline" style="font-family: Bungee Inline; font-size: 9px" title="Bungee Inline"> Bungee Inline</option>
+				<option value="Cabin Sketch" style="font-family: Cabin Sketch;" title="Cabin Sketch"> Cabin Sketch</option>
+				<option value="Calibri" style="font-family: Calibri;" title="Calibri" selected> Calibri </option>
+				<option value="Calibri Light" style="font-family: Calibri Light;" title="Calibri Light"> Calibri Light</option>
+				<option value="Californian Fb" style="font-family: Californian Fb;" title="Californian Fb"> Californian Fb</option>
+				<option value="Calisto MT" style="font-family: Calisto MT;" title="Calisto MT"> Calisto MT</option>
+				<option value="Cambria" style="font-family: Cambria;" title="Cambria"> Cambria</option>
+				<option value="Candara" style="font-family: Candara;" title=" Candara"> Candara</option>
+				<option value="Candara Light" style="font-family: Candara Light;" title=" Candara Light"> Candara Light</option>
+				<option value="Castellar" style="font-family: Castellar;" title=" Castellar"> Castellar</option>
+				<option value="Centaur" style="font-family: Centaur;" title=" Centaur"> Centaur</option>
+				<option value="Century" style="font-family: Century;" title=" Century"> Century</option>
+				<option value="Century Gothic" style="font-family: Century Gothic;" title=" Century Gothic"> Century Gothic</option>
+				<option value="Century SchoolBook" style="font-family: Century SchoolBook;" title=" Century SchoolBook"> Century SchoolBook</option>
+				<option value="Chiller" style="font-family: Chiller;" title="Chiller"> Chiller</option>
+				<option value="Cinzel Black" style="font-family: Cinzel Black;" title="Cinzel Black"> Cinzel Black</option>
+				<option value="Colonna MT" style="font-family: Colonna MT;" title="Colonna MT"> Colonna MT</option>
+				<option value="Comic Sans MS" style="font-family: Comic Sans MS;" title="Comic Sans MS"> Comic Sans MS</option>
+				<option value="Consolas" style="font-family: Consolas;" title="Consolas"> Consolas</option>
+				<option value="Costantia" style="font-family: Costantia;" title="Costantia"> Costantia</option>
+				<option value="Cookie" style="font-family: Cookie;" title="Cookie"> Cookie</option>
+				<option value="Cooper Black" style="font-family: Cooper Black;" title="Cooper Black"> Cooper Black</option>
+				<option value="Copperplate Gothic Light" style="font-family: Copperplate Gothic Light;" title="Copperplate Gothic Light"> Copperplate Gothic Light</option>
+				<option value="Corbel" style="font-family: Corbel;" title="Corbel"> Corbel</option>
+				<option value="Corbel Light" style="font-family: Corbel Light;" title="Corbel Light"> Corbel Light</option>
+				<option value="Courgette" style="font-family: Courgette;" title="Courgette"> Courgette</option>
+				<option value="Courier New" style="font-family: Courier New;" title="Courier New"> Courier New</option>
+				<option value="Curlz MT" style="font-family: Curlz MT;" title="Curlz MT"> Curlz MT</option>
+				<option value="Doppio One" style="font-family: Doppio One;" title="Doppio One"> Doppio One</option>
+				<option value="Dubai" style="font-family: Dubai;" title="Dubai"> Dubai</option>
+				<option value="Dubai Light" style="font-family: Dubai Light;" title="Dubai Light"> Dubai Light</option>
+				<option value="Dubai Medium" style="font-family: Dubai Medium;" title="Dubai Medium"> Dubai Medium</option>
+				<option value="Ebrima" style="font-family: Ebrima;" title="Ebrima"> Ebrima</option>
+				<option value="Edwardian Script ITC" style="font-family: Edwardian Script ITC;font-size: 16px" title="Edwardian Script ITC"> Edwardian Script ITC</option>
+				<option value="Elephant" style="font-family: Elephant;" title="Elephant"> Elephant</option>
+				<option value="Engravers MT" style="font-family: Engravers MT;" title="Engravers MT"> Engravers MT</option>
+				<option value="Euphorigenic" style="font-family: Euphorigenic;" title="Euphorigenic"> Euphorigenic</option>
+				<option value="Felix Titling" style="font-family: Felix Titling;" title="Felix Titling"> Felix Titling</option>
+				<option value="Footlight MT Light" style="font-family: Footlight MT Light;" title="Footlight MT Light"> Footlight MT Light</option>
+				<option value="Forte" style="font-family: Forte;" title="Forte"> Forte</option>
+				<option value="Franklin Gothic Book" style="font-family: Franklin Gothic Book;" title="Franklin Gothic Book"> Franklin Gothic Book</option>
+				<option value="Franklin Gothic Heavy" style="font-family: Franklin Gothic Heavy;" title="Franklin Gothic Heavy"> Franklin Gothic Heavy</option>
+				<option value="Franklin Gothic Medium" style="font-family: Franklin Gothic Medium;" title="Franklin Gothic Medium"> Franklin Gothic Medium</option>
+				<option value="Freestyle Script" style="font-family: Freestyle Script; font-size: 16px" title="Freestyle Script"> Freestyle Script</option>
+				<option value="French Script MT" style="font-family: French Script MT;font-size: 16px" title="French Script MT"> French Script MT</option>
+				<option value="Fugaz One" style="font-family: Fugaz One;" title="Fugaz One"> Fugaz One</option>
+				<option value="Gabriola" style="font-family: Gabriola;" title="Gabriola"> Gabriola</option>
+				<option value="Gadugi" style="font-family: Gadugi;" title="Gadugi"> Gadugi</option>
+				<option value="Garamond" style="font-family: Garamond;" title="Garamond"> Garamond</option>
+				<option value="Georgia" style="font-family: Georgia;" title="Georgia"> Georgia</option>
+				<option value="Gigi" style="font-family: Gigi;" title="Gigi"> Gigi</option>
+				<option value="Gill Sans MT" style="font-family: Gill Sans MT;" title="Gill Sans MT"> Gill Sans MT</option>
+				<option value="Gill Sans MT Condensed" style="font-family: Gill Sans MT Condensed;" title="Gill Sans MT Condensed"> Gill Sans MT Condensed</option>
+				<option value="Goudy Old Style" style="font-family: Goudy Old Style;" title="Goudy Old Style"> Goudy Old Style</option>
+				<option value="Goudy Stout" style="font-family: Goudy Stout;" title="Goudy Stout"> Goudy Stout</option>
+				<option value="Great Vibes" style="font-family: Great Vibes;" title="Great Vibes"> Great Vibes</option>
+				<option value="Haettenschweiler" style="font-family: Haettenschweiler;" title="Haettenschweiler"> Haettenschweiler</option>
+				<option value="Harrington" style="font-family: Harrington;" title="Harrington"> Harrington</option>
+				<option value="High Tower Text" style="font-family: High Tower Text;" title="High Tower Text"> High Tower Text</option>
+				<option value="Impact" style="font-family: Impact;" title="Impact"> Impact</option>
+				<option value="Imprint MT Shadow" style="font-family: Imprint MT Shadow;" title="Imprint MT Shadow"> Imprint MT Shadow</option>
+				<option value="Informal Roman" style="font-family: Informal Roman;" title="Informal Roman"> Informal Roman</option>
+				<option value="Ink Free" style="font-family: Ink Free;" title="Ink Free"> Ink Free</option>
+				<option value="Javanese Text" style="font-family: Javanese Text;" title="Javanese Text"> Javanese Text</option>
+				<option value="Jokerman" style="font-family: Jokerman;" title="Jokerman"> Jokerman</option>
+				<option value="Juice ITC" style="font-family: Juice ITC;" title="Juice ITC"> Juice ITC</option>
+				<option value="Kalam" style="font-family: Kalam;" title="Kalam"> Kalam</option>
+				<option value="Kalam Light" style="font-family: Kalam Light;" title="Kalam Light"> Kalam Light</option>
+				<option value="Kristen ITC" style="font-family: Kristen ITC;" title="Kristen ITC"> Kristen ITC</option>
+				<option value="Kunstler Script" style="font-family: Kunstler Script;" title="Kunstler Script"> Kunstler Script</option>
+				<option value="Leelawadee" style="font-family: Leelawadee;" title="Leelawadee"> Leelawadee</option>
+				<option value="Leelawadee UI" style="font-family: Leelawadee UI;" title="Leelawadee UI"> Leelawadee UI</option>
+				<option value="Leelawadee UI Light" style="font-family: Leelawadee UI Light;" title="Leelawadee UI Light"> Leelawadee UI Light</option>
+				<option value="Lemon" style="font-family: Lemon;" title="Lemon"> Lemon</option>
+				<option value="LimeLight" style="font-family: LimeLight;" title="LimeLight"> LimeLight</option>
+				<option value="Lucida Bright" style="font-family: Lucida Bright;" title="Lucida Bright"> Lucida Bright</option>
+				<option value="Lucida Calligraphy" style="font-family: Lucida Calligraphy;" title="Lucida Calligraphy"> Lucida Calligraphy</option>
+				<option value="Lucida Console" style="font-family: Lucida Console;" title="Lucida Console"> Lucida Console</option>
+				<option value="Lucida Fax" style="font-family: Lucida Fax;" title="Lucida Fax"> Lucida Fax</option>
+				<option value="Lucida Handwriting" style="font-family: Lucida Handwriting;" title="Lucida Handwriting"> Lucida Handwriting</option>
+				<option value="Lucida Sans" style="font-family: Lucida Sans;" title="Lucida Sans"> Lucida Sans</option>
+				<option value="Lucida Sans Typewriter" style="font-family: Lucida Sans Typewriter;" title="Lucida Sans Typewriter"> Lucida Sans Typewriter</option>
+				<option value="Lucida Sans Unicode" style="font-family: Lucida Sans Unicode;" title="Lucida Sans Unicode"> Lucida Sans Unicode</option>
+				<option value="Magneto" style="font-family: Magneto;" title="Magneto"> Magneto</option>
+				<option value="Maiandra GD" style="font-family: Maiandra GD;" title="Maiandra GD"> Maiandra GD</option>
+				<option value="Malgun Gothic" style="font-family: Malgun Gothic;" title="Malgun Gothic"> Malgun Gothic</option>
+				<option value="Marcellus SC" style="font-family: Marcellus SC;" title="Marcellus SC"> Marcellus SC</option>
+				<option value="Marlett" style="font-family: Marlett;" title="Marlett"> Marlett</option>
+				<option value="Matura MT Script Capitals" style="font-family: Matura MT Script Capitals;" title="Matura MT Script Capitals"> Matura MT Script Capitals</option>
+				<option value="Megrim" style="font-family: Megrim;" title="Megrim"> Megrim</option>
+				<option value="MingLiU_HKSCS-ExtB" style="font-family: MingLiU_HKSCS-ExtB;" title="MingLiU_HKSCS-ExtB"> MingLiU_HKSCS-ExtB</option>
+				<option value="MingLiU-ExtB" style="font-family: MingLiU-ExtB;" title="MingLiU-ExtB"> MingLiU-ExtB</option>
+				<option value="Mistral" style="font-family: Mistral;" title="Mistral"> Mistral</option>
+				<option value="Modern No. 20" style="font-family: Modern No. 20;" title="Modern No. 20"> Modern No. 20</option>
+				<option value="Monotype Corsiva" style="font-family: Monotype Corsiva;" title="Monotype Corsiva"> Monotype Corsiva</option>
+				<option value="Montserrat Subrayada" style="font-family: Montserrat Subrayada;" title="Montserrat Subrayada"> Montserrat Subrayada</option>
+				<option value="MS Gothic" style="font-family: MS Gothic;" title="MS Gothic"> MS Gothic</option>
+				<option value="MS PGothic" style="font-family: MS PGothic;" title="MS PGothic"> MS PGothic</option>
+				<option value="MS Reference Sans Serif" style="font-family: MS Reference Sans Serif;" title="MS Reference Sans Serif">MS Reference Sans Serif</option>
+				<option value="MS UI Gothic" style="font-family: MS UI Gothic;" title="MS UI Gothic"> MS UI Gothic</option>
+				<option value="MT Extra" style="font-family: MT Extra;" title="MT Extra"> MT Extra</option>
+				<option value="MV Boli" style="font-family: MV Boli;" title="MV Boli"> MV Boli</option>
+				<option value="Myanmar Text" style="font-family: Myanmar Text;" title="Myanmar Text"> Myanmar Text</option>
+				<option value="News Gothic MT" style="font-family: News Gothic MT;" title="News Gothic MT"> News Gothic MT</option>
+				<option value="Niagara Engraved" style="font-family: Niagara Engraved; font-size: 16px" title="Niagara Engraved"> Niagara Engraved</option>
+				<option value="Niagara Solid" style="font-family: Niagara Solid; font-size: 16px" title="Niagara Solid"> Niagara Solid</option>
+				<option value="Nirmala UI" style="font-family: Nirmala UI;" title="Nirmala UI"> Nirmala UI</option>
+				<option value="Noto Sans" style="font-family: Noto Sans;" title="Noto Sans"> Noto Sans</option>
+				<option value="NSimSun" style="font-family: NSimSun;" title="NSimSun"> NSimSun</option>
+				<option value="Old English Text MT" style="font-family: Old English Text MT;" title="Old English Text MT"> Old English Text MT</option>
+				<option value="Onyx" style="font-family: Onyx; font-size: 20px" title="Onyx"> Onyx</option>
+				<option value="Orbitron" style="font-family: Orbitron;" title="Orbitron"> Orbitron</option>
+				<option value="Palace Script MT" style="font-family: Palace Script MT; font-size: 20px" title="Palace Script MT"> Palace Script MT</option>
+				<option value="Palatino Linotype" style="font-family: Palatino Linotype;" title="Palatino Linotype"> Palatino Linotype</option>
+				<option value="Papyrus" style="font-family: Papyrus;" title="Papyrus"> Papyrus</option>
+				<option value="Parchment" style="font-family: Parchment; font-size: 22px" title="Parchment"> Parchment</option>
+				<option value="Permanent Marker" style="font-family: Permanent Marker;" title="Permanent Marker"> Permanent Marker</option>
+				<option value="Perpetua" style="font-family: Perpetua;" title="Perpetua"> Perpetua </option>
+				<option value="Perpetua Titling MT" style="font-family: Perpetua Titling MT;" title="Perpetua Titling MT"> Perpetua Titling MT </option>
+				<option value="Playball" style="font-family: Playball" title="Playball"> Playball</option>
+				<option value="Playbill" style="font-family: Playbill" title="Playbill"> Playbill</option>
+				<option value="PMingLiU-ExtB" style="font-family: PMingLiU-ExtB" title="PMingLiU-ExtB"> PMingLiU-ExtB</option>
+				<option value="Poor Richard" style="font-family: Poor Richard;" title="Poor Richard"> Poor Richard</option>
+				<option value="Pristina" style="font-family: Pristina;" title="Pristina"> Pristina</option>
+				<option value="Quicksand" style="font-family: Quicksand;" title="Quicksand"> Quicksand</option>
+				<option value="Quicksand Light" style="font-family: Quicksand Light;" title="Quicksand Light"> Quicksand Light</option>
+				<option value="Quicksand Medium" style="font-family: Quicksand Medium;" title="Quicksand Medium"> Quicksand Medium</option>
+				<option value="Ravie" style="font-family: Ravie;" title="Ravie"> Ravie</option>
+				<option value="Rockwell" style="font-family: Rockwell;" title="Rockwell"> Rockwell</option>
+				<option value="Rockwell Condensed" style="font-family: Rockwell Condensed;" title="Rockwell Condensed"> Rockwell Condensed</option>
+				<option value="Russo One" style="font-family: Russo One;" title="Russo One"> Russo One</option>
+				<option value="Segoe Print" style="font-family: Segoe Print;" title="Segoe Print"> Segoe Print</option>
+				<option value="Segoe Script" style="font-family: Segoe Script;" title="Segoe Script"> Segoe Script</option>
+				<option value="Segoe UI" style="font-family: Segoe UI;" title="Segoe UI"> Segoe UI</option>
+				<option value="Segoe UI Black" style="font-family: Segoe UI Black;" title="Segoe UI Black"> Segoe UI Black</option>
+				<option value="Segoe UI Emoji" style="font-family: Segoe UI Emoji;" title="Segoe UI Emoji"> Segoe UI Emoji</option>
+				<option value="Segoe UI Light" style="font-family: Segoe UI Light;" title="Segoe UI Light"> Segoe UI Light</option>
+				<option value="Segoe UI SemiBold" style="font-family: Segoe UI SemiBold;" title="Segoe UI SemiBold"> Segoe UI SemiBold</option>
+				<option value="Segoe UI Symbol" style="font-family: Segoe UI Symbol;" title="Segoe UI Symbol"> Segoe UI Symbol</option>
+				<option value="Showcard Gothic" style="font-family: Showcard Gothic;" title="Showcard Gothic"> Showcard Gothic</option>
+				<option value="Shrikhand" style="font-family: Shrikhand;" title="Shrikhand"> Shrikhand</option>
+				<option value="Sigmar One" style="font-family: Sigmar One;" title="Sigmar One"> Sigmar One</option>
+				<option value="SimSun" style="font-family: SimSun;" title="SimSun"> SimSun</option>
+				<option value="SimSun-ExtB" style="font-family: SimSun-ExtB;" title="SimSun-ExtB"> SimSun-ExtB</option>
+				<option value="Sitka Banner" style="font-family: Sitka Banner;" title="Sitka Banner"> Sitka Banner</option>
+				<option value="Sitka Display" style="font-family: Sitka Display;" title="Sitka Display"> Sitka Display</option>
+				<option value="Sitka Heading" style="font-family: Sitka Heading;" title="Sitka Heading"> Sitka Heading</option>
+				<option value="Sitka Small" style="font-family: Sitka Small;" title="Sitka Small"> Sitka Small</option>
+				<option value="Sitka Subheading" style="font-family: Sitka Subheading;" title="Sitka Subheading"> Sitka Subheading</option>
+				<option value="Sitka Text" style="font-family: Sitka Text;" title="Sitka Text"> Sitka Text</option>
+				<option value="Snap ITC" style="font-family: Snap ITC;" title="Snap ITC"> Snap ITC</option>
+				<option value="Stencil" style="font-family: Stencil;" title="Stencil"> Stencil</option>
+				<option value="Sylfaen" style="font-family: Sylfaen;" title="Sylfaen"> Sylfaen</option>
+				<option value="Symbol" style="font-family: Symbol;" title="Symbol"> Symbol</option>
+				<option value="Tahoma" style="font-family: Tahoma;" title="Tahoma"> Tahoma</option>
+				<option value="Teko SemiBold" style="font-family: Teko SemiBold;" title="Teko SemiBold"> Teko SemiBold</option>
+				<option value="Tempus Sans ITC" style="font-family: Tempus Sans ITC;" title="Tempus Sans ITC"> Tempus Sans ITC</option>
+				<option value="Times New Roman" style="font-family: Times New Roman;" title="Times New Roman"> Times New Roman</option>
+				<option value="Trebuchet MS" style="font-family: Trebuchet MS;" title="Trebuchet MS"> Trebuchet MS</option>
+				<option value="TW Cen MT" style="font-family: TW Cen MT;" title="TW Cen MT"> TW Cen MT</option>
+				<option value="TW Cen MT Condensed" style="font-family: TW Cen MT Condensed;" title="TW Cen MT Condensed"> TW Cen MT Condensed</option>
+				<option value="Ubuntu Mono" style="font-family: Ubuntu Mono;" title="Ubuntu Mono"> Ubuntu Mono</option>
+				<option value="Verdana" style="font-family: Verdana;" title="Verdana"> Verdana</option>
+				<option value="Viner Hand ITC" style="font-family: Viner Hand ITC;" title="Viner Hand ITC"> Viner Hand ITC</option>
+				<option value="Vivaldi" style="font-family: Vivaldi; font-size: 16px" title="Vivaldi"> Vivaldi</option>
+				<option value="Vladimir Script" style="font-family: Vladimir Script;" title="Vladimir Script"> Vladimir Script</option>
+				<option value="Webdings" style="font-family: Webdings;" title="Webdings"> Webdings</option>
+				<option value="Wide Latin" style="font-family: Wide Latin;" title="Wide Latin"> Wide Latin</option>
+				<option value="Wingdings" style="font-family: Wingdings;" title="Wingdings"> Wingdings</option>
+				<option value="Yellowtail" style="font-family: Yellowtail;" title="Yellowtail"> Yellowtail</option>
+				<option value="YU Gothic" style="font-family: YU Gothic;" title="YU Gothic"> YU Gothic</option>
+				<option value="YU Gothic Light" style="font-family: YU Gothic Light;" title="YU Gothic Light"> YU Gothic Light</option>
+				<option value="YU Gothic Medium" style="font-family: YU Gothic Medium;" title="YU Gothic Medium"> YU Gothic Medium</option>
+				<option value="YU Gothic UI" style="font-family: YU Gothic UI;" title="YU Gothic UI"> YU Gothic UI</option>
+				<option value="YU Gothic UI Light" style="font-family: YU Gothic UI Light;" title="YU Gothic UI Light"> YU Gothic UI Light</option>
+				<option value="YU Gothic UI SemiBold" style="font-family: YU Gothic UI SemiBold;" title="YU Gothic UI SemiBold"> YU Gothic UI SemiBold</option>
+			</select>
+			<button onclick="toggleEdit()" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;" id="toggleEditButton">View Mode</button>
+			<br>
+			<br>
+			<i class="fab fa-firefox-browser" title="Features for Firefox" style="background-color: purple; padding: 5px 7px; color: orange; margin-left: 4px;"></i>
+			<button onclick="excCmd('increaseFontSize')" title="Increase Font Size" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-plus"></i></button>
+			<button onclick="excCmd('decreaseFontSize')" title="Decrease Font Size" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-minus"></i></button>
+			<button onclick="excCmd('enableObjectResizing')" title="Resize" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-expand-arrows-alt"></i></button>
+			<br>
+			<br>
+			<hr>		
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<iframe name="richTextField" style="width: 1000px; height: 500px;" id="TextField"></iframe>
+		<div contentEditable=true>rgfr</div>
+		<datalist id="colors">
+			<option>#000000</option>
+			<option>#434141</option>
+			<option>#615F5F</option>
+			<option>#939190</option>
+			<option>#ABA9A8</option>
+			<option>#d3d3d3</option>
+			<option>#E5E3E3</option>
+			<option>#F1EEEE</option>
+			<option>#F6F4F3</option>
+			<option>#FFFFFF</option>
+			<option>#8B0000</option>
+			<option>#800000</option>
+			<option>#B22222</option>
+			<option>#DC143C</option>
+			<option>#FF0000</option>
+			<option>#DC143C</option>
+			<option>#DB7093</option>
+			<option>#CD5C5C</option>
+			<option>#FA8072</option>
+			<option>#FF6347</option>
+			<option>#006400</option>
+			<option>#008000</option>
+			<option></option>
+		  </datalist>
+	<body>
+<!-- </html> -->

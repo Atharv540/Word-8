@@ -1,0 +1,186 @@
+body{
+    background-color:#F8F9FA;
+}
+#TextField{
+    background-color:white;
+}
+#boldButton{
+    background-color: #FFFFFF;
+}
+#boldButton:hover{
+    background-color: #E1DDDC;
+}
+#italicButton{
+    background-color: #FFFFFF;
+}
+#italicButton:hover{
+    background-color: #E1DDDC;
+
+}
+#underlineButton{
+    background-color: #FFFFFF;
+}
+#underlineButton:hover{
+    background-color: #E1DDDC;
+}
+#strikeButton{
+    background-color: #FFFFFF;
+}
+#strikeButton:hover{
+    background-color: #E1DDDC;
+
+}
+#leftAlignButton{
+    background-color: #FFFFFF;
+}
+#leftAlignButton:hover{
+    background-color: #E1DDDC;
+}
+#centerAlignButton{
+    background-color: #FFFFFF;
+}
+#centerAlignButton:hover{
+    background-color: #E1DDDC;
+
+}
+#rightAlignButton{
+    background-color: #FFFFFF;
+}
+#rightAlignButton:hover{
+    background-color: #E1DDDC;
+}
+#fullAlignButton{
+    background-color: #FFFFFF;
+}
+#fullAlignButton:hover{
+    background-color: #E1DDDC;
+
+}
+#cutButton{
+    background-color: #FFFFFF;
+}
+#cutButton:hover{
+    background-color: #E1DDDC;
+}
+#copyButton{
+    background-color: #FFFFFF;
+}
+#copyButton:hover{
+    background-color: #E1DDDC;
+
+}
+#subscriptButton{
+    background-color: #FFFFFF;
+}
+#subscriptButton:hover{
+    background-color: #E1DDDC;
+}
+#superscriptButton{
+    background-color: #FFFFFF;
+}
+#superscriptButton:hover{
+    background-color: #E1DDDC;
+
+}
+#removeFormatButton{
+    background-color: #FFFFFF;
+}
+#removeFormatButton:hover{
+    background-color: #E1DDDC;
+}
+#linkButton{
+    background-color: #FFFFFF;
+}
+#linkButton:hover{
+    background-color: #E1DDDC;
+}
+#unlinkButton{
+    background-color: #FFFFFF;
+}
+#unlinkButton:hover{
+    background-color: #E1DDDC;
+}
+#fontColorButton{
+    background-color: #FFFFFF;
+}
+#fontColorButton:hover{
+    background-color: #E1DDDC;
+}
+#highlightButton{
+    background-color: #FFFFFF;
+}
+#highlightButton:hover{
+    background-color: #E1DDDC;
+}
+#unhighlightButton{
+    background-color: #FFFFFF;
+}
+#unhighlightButton:hover{
+    background-color: #E1DDDC;
+}
+#undoButton{
+    background-color: #FFFFFF;
+}
+#undoButton:hover{
+    background-color: #E1DDDC;
+}
+#redoButton{
+    background-color: #FFFFFF;
+}
+#redoButton:hover{
+    background-color: #E1DDDC;
+}
+#ulButton{
+    background-color: #FFFFFF;
+}
+#ulButton:hover{
+    background-color: #E1DDDC;
+}
+#olButton{
+    background-color: #FFFFFF;
+}
+#olButton:hover{
+    background-color: #E1DDDC;
+}
+#pasteButton{
+    background-color: #FFFFFF;
+}
+#pasteButton:hover{
+    background-color: #E1DDDC;
+}
+#highlightInput{
+    background-color: #FFFFFF;
+}
+#highlightInput:hover{
+    background-color: #E1DDDC;
+}
+#fontColorInput{
+    background-color: #FFFFFF;
+}
+#fontColorInput:hover{
+    background-color: #E1DDDC;
+}
+#indentButton{
+    background-color: #FFFFFF;
+}
+#indentButton:hover{
+    background-color: #E1DDDC;
+}
+#outdentButton{
+    background-color: #FFFFFF;
+}
+#outdentButton:hover{
+    background-color: #E1DDDC;
+}
+#paragraphButton{
+    background-color: #FFFFFF;
+}
+#paragraphButton:hover{
+    background-color: #E1DDDC;
+}
+#toggleSrcButton{
+    background-color: #FFFFFF;
+}
+#toggleSrcButton:hover{
+    background-color: #E1DDDC;
+}
