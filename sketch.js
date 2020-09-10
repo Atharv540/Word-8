@@ -81,3 +81,13 @@
 				let marqueeFont = prompt("What font should your moving text be in?");
 				 document.getElementById("TextField").contentWindow.document.body.innerHTML = document.getElementById("TextField").contentWindow.document.body.innerHTML+"<marquee bgColor="+marqueeBGColor+" "+"style='font-family:"+marqueeFont+";'"+">"+marqueeText+"</marquee><br>"
 			}
+			function addGoogleFont(){
+				let googleFont = prompt("What Google font do you want to use?");
+				document.getElementById("TextField").contentWindow.document.body.innerHTML =  document.getElementById("TextField").contentWindow.document.body.innerHTML+"<link href='https://fonts.googleapis.com/css?family="+googleFont+"'"+" rel='stylesheet'>"
+				var x = document.createElement("OPTION");
+				x.setAttribute("value", googleFont);
+				x.style.fontFamily = "Dubai";
+				var t = document.createTextNode(googleFont+" (Google font)");
+				x.appendChild(t);
+				document.getElementById("Fonts").appendChild(x);
+			}
