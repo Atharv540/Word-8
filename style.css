@@ -1,192 +1,210 @@
 body{
-    background-color:#F8F9FA;
+    background-color:#F3F3F3;
+}
+ul {
+    list-style-type: square;
 }
 #TextField{
     background-color:white;
 }
 #boldButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #boldButton:hover{
     background-color: #E1DDDC;
 }
 #italicButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #italicButton:hover{
     background-color: #E1DDDC;
 
 }
 #underlineButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #underlineButton:hover{
     background-color: #E1DDDC;
 }
 #strikeButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #strikeButton:hover{
     background-color: #E1DDDC;
 
 }
 #leftAlignButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #leftAlignButton:hover{
     background-color: #E1DDDC;
 }
 #centerAlignButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #centerAlignButton:hover{
     background-color: #E1DDDC;
 
 }
 #rightAlignButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #rightAlignButton:hover{
     background-color: #E1DDDC;
 }
 #fullAlignButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #fullAlignButton:hover{
     background-color: #E1DDDC;
 
 }
 #cutButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #cutButton:hover{
     background-color: #E1DDDC;
 }
 #copyButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #copyButton:hover{
     background-color: #E1DDDC;
 
 }
 #subscriptButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #subscriptButton:hover{
     background-color: #E1DDDC;
 }
 #superscriptButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #superscriptButton:hover{
     background-color: #E1DDDC;
 
 }
 #removeFormatButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #removeFormatButton:hover{
     background-color: #E1DDDC;
 }
 #linkButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #linkButton:hover{
     background-color: #E1DDDC;
 }
 #unlinkButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #unlinkButton:hover{
     background-color: #E1DDDC;
 }
 #fontColorButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #fontColorButton:hover{
     background-color: #E1DDDC;
 }
 #highlightButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #highlightButton:hover{
     background-color: #E1DDDC;
 }
 #unhighlightButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #unhighlightButton:hover{
     background-color: #E1DDDC;
 }
 #undoButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #undoButton:hover{
     background-color: #E1DDDC;
 }
 #redoButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #redoButton:hover{
     background-color: #E1DDDC;
 }
 #ulButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #ulButton:hover{
     background-color: #E1DDDC;
 }
 #olButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #olButton:hover{
     background-color: #E1DDDC;
 }
 #pasteButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #pasteButton:hover{
     background-color: #E1DDDC;
 }
 #highlightInput{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
+    width: 45px;
+    height:20px;
+    border: none;
+    outline: none;
 }
 #highlightInput:hover{
     background-color: #E1DDDC;
 }
 #fontColorInput{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
+    width: 45px;
+    height:20px;
+    border: none;
+    outline: none;
 }
 #fontColorInput:hover{
     background-color: #E1DDDC;
 }
 #indentButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #indentButton:hover{
     background-color: #E1DDDC;
 }
 #outdentButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #outdentButton:hover{
     background-color: #E1DDDC;
 }
 #paragraphButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #paragraphButton:hover{
     background-color: #E1DDDC;
 }
 #toggleSrcButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #toggleSrcButton:hover{
     background-color: #E1DDDC;
 }
 #googleFontsButton{
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
 }
 #googleFontsButton:hover{
     background-color: #E1DDDC;
+}
+.buttonsfile{
+    border-radius: 0%;
+    outline: none;
+    background-color: blue;
+    padding: 20px 20px;
+    border: none;
 }

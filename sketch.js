@@ -4,11 +4,16 @@
 			var speech = new p5.Speech("Microsoft David - English (United States)");
 			var selectedText = window.getSelection();
 			var font, highlightColor, highlightener;
+			var findInput, inputResults;
 			function setup(){
 				voicesDropdown = select("#Voices");
 				font = select("#Fonts");
 				highlightColor = select("#highlightInput");
-				highlightener = select("#highlightButton");
+				highlightButtonIcon = select("#highlightButtonIcon");
+				fontColorIcon = select("#fontColorIcon");
+				fontColor = select("#fontColorInput");
+				findInput = createInput();
+				inputResults = 0;
 			}
 			function enableEditMode(){
 				richTextField.document.designMode="On";
@@ -23,7 +28,6 @@
 				if(showSourceCode){
 					richTextField.document.getElementsByTagName('body')[0].innerHTML = richTextField.document.
 					getElementsByTagName('body')[0].textContent
-
 					showSourceCode = false;
 				}
 				else{
@@ -52,8 +56,8 @@
 				speech.speak(text)
 			}
 			function draw(){
-			hightlightButtonColor = highlightColor.value();
-			highlightener.style("color", highlightColor.value());
+			highlightButtonIcon.style("color", highlightColor.value());
+			fontColorIcon.style("color", fontColor.value());
 			myText = document.getElementById("TextField");
 			content = myText.contentWindow.document.body.textContent;
 			splitText = content.split("");
@@ -73,21 +77,47 @@
 					excCmdWithArg('fontName', font.value());
 					excCmd("insertOrderedList");
 				}
+				else if(splitText[x]===findInput.value()){
+					inputResults++
+					console.log(inputResults);
+				}
 			}
 			} 
 			function createMarqueeOfChoice(){
 				let marqueeText = prompt("What is the text that you want to be moving?");
-				let marqueeBGColor = prompt("Give me the background color that you want your moving text to have.");
-				let marqueeFont = prompt("What font should your moving text be in?");
-				 document.getElementById("TextField").contentWindow.document.body.innerHTML = document.getElementById("TextField").contentWindow.document.body.innerHTML+"<marquee bgColor="+marqueeBGColor+" "+"style='font-family:"+marqueeFont+";'"+">"+marqueeText+"</marquee><br>"
+				if(marqueeText!==null){
+					let marqueeBGColor = prompt("Give me the background color that you want your moving text to have.");
+					let marqueeFont = prompt("What font should your moving text be in?");
+				 	document.getElementById("TextField").contentWindow.document.body.innerHTML = document.getElementById("TextField").contentWindow.document.body.innerHTML+"<marquee bgColor="+marqueeBGColor+" "+"style='font-family:"+marqueeFont+";'"+">"+marqueeText+"</marquee><br>"
+				}
 			}
 			function addGoogleFont(){
 				let googleFont = prompt("What Google font do you want to use?");
-				document.getElementById("TextField").contentWindow.document.body.innerHTML =  document.getElementById("TextField").contentWindow.document.body.innerHTML+"<link href='https://fonts.googleapis.com/css?family="+googleFont+"'"+" rel='stylesheet'>"
-				var x = document.createElement("OPTION");
-				x.setAttribute("value", googleFont);
-				x.style.fontFamily = "Dubai";
-				var t = document.createTextNode(googleFont+" (Google font)");
-				x.appendChild(t);
-				document.getElementById("Fonts").appendChild(x);
+				if(googleFont!==null){
+					document.getElementById("TextField").contentWindow.document.body.innerHTML =  "<link href='https://fonts.googleapis.com/css?family="+googleFont+"'"+" rel='stylesheet'>"+document.getElementById("TextField").contentWindow.document.body.innerHTML;
+					var x = document.createElement("OPTION");
+					x.setAttribute("value", googleFont);
+					x.style.fontFamily = "Dubai";
+					var t = document.createTextNode(googleFont+" (Google font)");
+					x.appendChild(t);
+					document.getElementById("Fonts").appendChild(x);
+				}
+			}
+			function createTable(){
+				let rows = parseFloat(prompt("How many rows do you want your table to have?"));
+				console.log(rows);
+				document.getElementById("TextField").contentWindow.document.body.innerHTML = document.getElementById("TextField").contentWindow.document.body.innerHTML+"<table border=20px>";
+				for(m=0; m<rows; m++){
+					document.getElementById("TextField").contentWindow.document.body.innerHTML = document.getElementById("TextField").contentWindow.document.body.innerHTML+"<tr><td>Hello</td></tr>";
+				}
+				document.getElementById("TextField").contentWindow.document.body.innerHTML = document.getElementById("TextField").contentWindow.document.body.innerHTML+'</table>'
+				}
+			function openContextMenu(){
+				alert("What??? Where'd the context menu go???")
+			}
+			function createUnorderedList(){
+				document.getElementById("TextField").contentWindow.document.body.innerHTML = document.getElementById("TextField").contentWindow.document.body.innerHTML+"<ul type='square'><li></li></ul>"
+			}
+			function makeType(){
+				document.getElementById("TextField").contentWindow.document.body.innerHTML = "<style> ul{list-style-type: square} </style>"+document.getElementById("TextField").contentWindow.document.body.innerHTML
 			}

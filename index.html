@@ -10,11 +10,11 @@
 		<script src="https://kit.fontawesome.com/ccd7270aeb.js" crossorigin="anonymous"></script>
 		<script src="p5.js-speech/lib/p5.speech.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css">
-    	<meta charset="utf-8">
+		<meta charset="utf-8">
 	</head>
-	<body onload="enableEditMode()">
+	<body onload="enableEditMode(); excCmdWithArg('fontSize', 4)">
 		<script src="sketch.js"></script>
-		<div style="background-color: #FFFFFF; position: fixed; width:100%;">
+		<div style="background-color:#F3F3F3; position: fixed; width:100%; margin-top: -8px; margin-left: -8px; box-shadow: 0.1px 0.2px 8px grey">
 			<br>
 			<button onclick="excCmd('bold')" id="boldButton" title="Bold" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px; margin-left: 4px;" ><i class="fas fa-bold"></i></button>
 			<button onclick="excCmd('italic')" id="italicButton" title="Italic" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-italic"></i></button>
@@ -25,14 +25,14 @@
 			<button onclick="excCmd('subscript')" id="subscriptButton" title="Subscript" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-subscript"></i></button>
 			<button onclick="excCmd('superscript')" id="superscriptButton" title="Superscript" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-superscript"></i></button>
 			|
-			<button onclick="excCmdWithArg('createLink', prompt('Enter a URL','https://')) " id="linkButton" title="Link" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px; margin-left: 4px;"><i class="fas fa-link"></i></button>
-			<button onclick="excCmd('unlink')" id="unlinkButton" title="Unlink" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-unlink"></i></button>
+			<button onclick="excCmdWithArg('createLink', prompt('Enter a URL','https://')) " id="linkButton" title="Link" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px; margin-left: 4px;"><i class="fas fa-link" style="color: blue;"></i></button>
+			<button onclick="excCmd('unlink')" id="unlinkButton" title="Unlink" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-unlink" style="color: blue;"></i></button>
 			|
-			<button onclick="excCmd('undo')" title="Undo" id="undoButton" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-undo"></i></button>
-			<button onclick="excCmd('redo')" title="Redo" id="undoButton" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-repeat"></i></button>
+			<button onclick="excCmd('undo')" title="Undo" id="undoButton" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-undo" style="color: red;"></i></button>
+			<button onclick="excCmd('redo')" title="Redo" id="undoButton" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-repeat" style="color: green;"></i></button>
 			|
-			<button onclick="excCmd('insertUnorderedList')" id="ulButton"title="Bullet Points" style="border-radius: 0%;border: none; outline: none; padding: 5px 7px;"><i class="fas fa-list-ul"></i></button>
-			<button onclick="excCmd('insertOrderedList'); excCmdWithArg('fontName', font.value);"  id="olButton" title="Numbered Points" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-list-ol"></i></button>
+			<button onclick="excCmd('insertUnorderedList');" id="ulButton"title="Bullet Points" style="border-radius: 0%;border: none; outline: none; padding: 5px 7px;"><i class="fas fa-list-ul fa-lg" style="color: rgb(224, 109, 15);"></i></button>
+			<button onclick="excCmd('insertOrderedList'); excCmdWithArg('fontName', font.value);"  id="olButton" title="Numbered Points" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-list-ol fa-lg" style="color: rgb(224, 109, 15);"></i></button>
 			|
 			<button onclick="excCmd('justifyLeft')" id="leftAlignButton" title="Align Left" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-align-left"></i></button>
 			<button onclick="excCmd('justifyCenter')" id="centerAlignButton" title="Align Center" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-align-center"></i></button>
@@ -43,21 +43,24 @@
 			<button onclick="excCmd('copy')" id="copyButton" style="border-radius: 0%;border: none; outline: none; padding: 5px 7px;"><i class="fas fa-copy" title="Copy" ></i></button>
 			<button onclick="excCmd('paste')" id="pasteButton" title="Paste" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-paste"></i></button>
 			|
-			<button onclick="excCmdWithArg('hiliteColor', highlightInput.value);" id="highlightButton" title="Highlight" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-highlighter"></i></button>
+			<button onclick="excCmdWithArg('hiliteColor', highlightInput.value);" id="highlightButton" title="Highlight" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px; font-family: Dubai;"><b>A</b> <i class="fas fa-highlighter" id="highlightButtonIcon"></i></button>
+			<input type="color" onchange="excCmdWithArg('hiliteColor', this.value);" id="highlightInput" value="#FFFF00" style=" margin-left: 4px;" list="colors">
 			<button onclick="excCmdWithArg('hiliteColor', 'white');" id="unhighlightButton" title="Unhighlight" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="far fa-times-circle"></i><i class="fas fa-highlighter"></i></button>
 			|
 			<button onclick="excCmd('indent')" id="indentButton" title="Indent" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-indent"></i></button>
 			<button onclick="excCmd('outdent')" id="outdentButton" title="Outdent" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-outdent"></i></button>
 			|
 			<button onclick="excCmd('insertParagraph');" id="paragraphButton" title="Paragraph" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fas fa-paragraph"></i></button>
-			<button onclick="toggleSource()" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px;"  title="Toggle Source" id="toggleSrcButton"><i class="fas fa-code fa"></i></button>
+			<button onclick="addGoogleFont()"id="googleFontsButton" style="color: green; border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fab fa-google" style="color: red;">  <font face="dubai" color="green">Fonts</font></i></button>
 			|
-			<button onclick="addGoogleFont()"id="googleFontsButton" style="color: green; border-radius: 0%; border: none; outline: none; padding: 5px 7px;"><i class="fab fa-google">  <font face="dubai">Fonts</font></i></button>
+			<button onclick="excCmdWithArg('foreColor', fontColorInput.value);" id="fontColorButton" title="Change font color" style="border-radius: 0%; border: none; outline: none; padding: 5px 7px; font-family: Dubai;"><b>A</b> <i class="fas fa-pencil-alt" id="fontColorIcon"></i></button>
+			<input type="color" onchange="excCmdWithArg('foreColor', this.value);" id="fontColorInput" list="colors" value="#FF0000">
+			<button onclick="createTable();">Create Table</button>
+			|
 			<br>
 			<br>
-			<input type="color" onchange="excCmdWithArg('hiliteColor', this.value);" id="highlightInput" value="#FFFF00" style=" margin-left: 4px;" list="colors">
-			<input type="color" onchange="excCmdWithArg('foreColor', this.value);" id="fontColorInput" list="colors">
-			<button onclick="createMarqueeOfChoice();" title="Insert Moving text" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;">Create Moving Text</button>
+			<button onclick="createMarqueeOfChoice();" title="Insert Moving text" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px; margin-left: 4px; ">Create Moving Text</button>
+			<button onclick="toggleSource()" style="border-radius: 0%; border: none; outline: none; padding: 6px 8px;"  title="Toggle Source" id="toggleSrcButton"><i class="fas fa-code fa-lg" style="color: orange"></i></button>
 			<br>
 			<br>
 			<button onclick="speak(document.getElementById('TextField').contentWindow.document.body.textContent)" title="Speak" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px; margin-left: 4px;"><i class="fas fa-microphone"></i></button>
@@ -93,10 +96,10 @@
 					<option value="Microsoft HiuGaai Online (Natural) - Chinese (Hong Kong)" style="font-family: Dubai;">Microsoft HiuGaai Online (Natural) - Chinese (Hong Kong)</option>
 					<option value="Microsoft HiuGaai Online (Natural) - Chinese (Hong Kong)" style="font-family: Dubai;">Microsoft HiuGaai Online (Natural) - Chinese (Hong Kong)</option>
 					<option value="Microsoft HsiaoYu Online (Natural) - Chinese (Taiwan)" style="font-family: Dubai;">Microsoft HsiaoYu Online (Natural) - Chinese (Taiwan)</option>
-					<option value="Microsoft David Desktop - English (United States)" style="font-family: Dubai;">Microsoft David Desktop - English (United States)</option>
-					<option value="Microsoft Zira Desktop - English (United States)" style="font-family: Dubai;">Microsoft Zira Desktop - English (United States)</option>
 					</optgroup>
 					<optgroup label="Voices For Google Chrome">
+					<option value="Microsoft David Desktop - English (United States)" style="font-family: Dubai;">Microsoft David Desktop - English (United States)</option>
+					<option value="Microsoft Zira Desktop - English (United States)" style="font-family: Dubai;">Microsoft Zira Desktop - English (United States)</option>
 					<option value="Google Deutsch" style="font-family: Dubai;">Google Deutsch</option>
 					<option value="Google US English" style="font-family: Dubai;">Google US English</option>
 					<option value="Google UK English Female" style="font-family: Dubai;">Google UK English Female</option>
@@ -121,7 +124,7 @@
 			<button onclick="stopSpeaking()" title="Stop Speaking" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-microphone-slash"></i></button>
 			<br>
 			<br>
-			<button onclick="excCmd('delete')" title="Backspace" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-backspace"></i></button>
+			<button onclick="excCmd('delete')" title="Backspace" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px; margin-left: 4px;"><i class="fas fa-backspace"></i></button>
 			<button onclick="excCmd('forwardDelete')" title=" Forward Delete" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-forward"></i>    <i class="fas fa-backspace fa-rotate-180"></i></button>
 			<button onclick="excCmd('selectAll')" title="Select All" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;">Select All</button>
 			<button onclick="excCmdWithArg('insertImage', prompt('Enter the image URL', ''));" title="Image" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-file-image-o"></i></button>
@@ -135,13 +138,13 @@
 				<option value="H3" style="font-size: 18.72px">Heading 1</option>
 				<option value="H4" style="font-size: 16px">Heading 2</option>
 				<option value="H5" style="font-size: 13.28px">Heading 3</option>
-				<option value="H6" style="font-size: 10.72px">Small Heading</option>
+				<option value="H6" style="font-size: 10.72px" selected>Small Heading</option>
 			</select>
 			<select style="background-color: rgb(175, 169, 168 ); padding: 3px 5px; outline: none;" onchange="excCmdWithArg('fontSize', this.value);">
 				<option>1</option>
 				<option>2</option>
 				<option>3</option>
-				<option>4</option>
+				<option selected>4</option>
 				<option>5</option>
 				<option>6</option>
 				<option>7</option>
@@ -358,8 +361,7 @@
 			<button onclick="excCmd('decreaseFontSize')" title="Decrease Font Size" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-minus"></i></button>
 			<button onclick="excCmd('enableObjectResizing')" title="Resize" style="border-radius: 0%; background-color: rgb(175, 169, 168 ); border: none; outline: none; padding: 5px 7px;"><i class="fas fa-expand-arrows-alt"></i></button>
 			<br>
-			<br>
-			<hr>		
+			<br>	
 		</div>
 		<br>
 		<br>
@@ -377,7 +379,8 @@
 		<br>
 		<br>
 		<br>
-		<iframe name="richTextField" style="width: 1000px; height: 500px;" id="TextField"></iframe>
+		<iframe name="richTextField" style="width: 800px; height: 500px; margin-left: 180px; border: solid grey 0.1px;" id="TextField">
+		  </iframe>
 		<datalist id="colors">
 			<option>#000000</option>
 			<option>#434141</option>
@@ -403,5 +406,6 @@
 			<option>#008000</option>
 			<option></option>
 		  </datalist>
+
 	<body>
 <!-- </html> -->
